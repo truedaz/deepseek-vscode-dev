@@ -1,0 +1,1 @@
+# Quick Start\nRun npm install && npm run compile

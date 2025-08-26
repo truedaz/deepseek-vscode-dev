@@ -1,0 +1,89 @@
+{
+  "name": "deepseek-v3-sidebar-chat",
+  "displayName": "DeepSeek V3 Chat",
+  "description": "Left-sidebar chat for DeepSeek V3 — edit or create files in the workspace from chat responses.",
+  "version": "0.1.0",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:deepseekChatView",
+    "onCommand:deepseek.openChat"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "deepseekChatContainer",
+          "title": "DeepSeek",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "deepseekChatContainer": [
+        {
+          "id": "deepseekChatView",
+          "name": "Chat",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "deepseek.openChat",
+        "title": "Open DeepSeek Chat",
+        "icon": "$(comment-discussion)"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "DeepSeek V3",
+      "properties": {
+        "deepseek.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your DeepSeek V3 API key"
+        },
+        "deepseek.endpoint": {
+          "type": "string",
+          "default": "https://api.deepseek.com/v1/chat/completions",
+          "description": "DeepSeek API endpoint"
+        },
+        "deepseek.model": {
+          "type": "string",
+          "default": "deepseek-chat",
+          "description": "Model to use"
+        },
+        "deepseek.allowEditing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow the extension to create or edit files in the workspace"
+        },
+        "deepseek.maxResponseTokens": {
+          "type": "number",
+          "default": 1024,
+          "description": "Maximum tokens requested from the model"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile && npm run copy-media",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "copy-media": "mkdir -p out/media && cp media/* out/media/"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.0",
+    "@types/vscode": "^1.70.0",
+    "webpack": "^5.0.0",
+    "ts-loader": "^9.0.0"
+  },
+  "dependencies": {}
+}
